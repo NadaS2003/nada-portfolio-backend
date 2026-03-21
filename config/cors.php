@@ -18,9 +18,7 @@ return [
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://nada-portfolio-frontend-git-main-nadas2003s-projects.vercel.app/projects',
-        'http://localhost:5173', // أضف هذا السطر للسماح بالطلبات من localhost
-    ],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
@@ -30,6 +28,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
