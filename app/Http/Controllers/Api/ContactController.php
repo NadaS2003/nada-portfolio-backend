@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,8 +29,14 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-
-        Mail::to($validated['email'])->send(new \App\Mail\ContactMail($validated));
+        try {
+            Mail::to('nadaramadan1512002@gmail.com')->send(new ContactMail($validated));
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            // هذا السطر سيكشف لنا السر في تبويب الـ Response في المتصفح
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+       // Mail::to($validated['email'])->send(new \App\Mail\ContactMail($validated));
 
         return response()->json([
             'status' => 'success',
